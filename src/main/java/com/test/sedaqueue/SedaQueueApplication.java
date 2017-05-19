@@ -30,9 +30,9 @@ public class SedaQueueApplication implements CommandLineRunner {
 
 		@Override
 		public void configure() throws Exception {
-			from("direct://direct-queue").routeId("toAsync").to("seda://async-queue");
+			from("direct://direct-queue").routeId("toAsync").to("seda://async-queue?size=100");
 
-			from("seda://async-queue?size=100").routeId("toLog").log("${body}");
+			from("seda://async-queue").routeId("toLog").log("${body}");
 		}
 	}
 }
